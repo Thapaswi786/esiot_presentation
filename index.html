@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Messaging (SMS) Using GSM | ECE Learning Lab</title>
+<style>
+:root{--navy:#10243a;--blue:#1769aa;--cyan:#dff4fb;--ink:#203044;--muted:#5b6b7d;--paper:#fff;--bg:#f3f6fa;--line:#d8e1eb;--green:#18794e;--red:#b42318;--gold:#936500;--shadow:0 8px 26px #10243a0b}
+body.dark{--navy:#d9eaff;--blue:#69b7ff;--cyan:#20384b;--ink:#e6edf5;--muted:#a7b7c8;--paper:#142234;--bg:#0b1420;--line:#2b3d51;--green:#75d6a1;--red:#ff9992;--gold:#ffd06b;--shadow:0 8px 26px #0003}
+body.dark th{background:#203449;color:#e6edf5}body.dark .callout{background:#172f42}body.dark .warn{background:#3a2e18}body.dark .good{background:#153326}body.dark .diagram{background:#101d2c}body.dark .formula{background:#203449}body.dark code:not(pre code){background:#25374a;color:#ffd0a8}body.dark .node{background:#20384b;color:#e6edf5}body.dark .option:hover{background:#203449}body.dark .secondary{background:#2b3d51;color:#e6edf5}body.dark nav{background:#142234}body.dark nav a{color:#e6edf5}body.dark .pill{background:#ffffff1c}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.62 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}header{background:linear-gradient(125deg,#10243a,#1769aa);color:#fff;padding:36px max(22px,calc((100% - 1180px)/2)) 30px}header .eyebrow{letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;color:#bde8ff;font-weight:800}h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.12;margin:.4rem 0 1rem}header p{max-width:850px;margin:.5rem 0;color:#e6f4ff}.header-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.header-tools button{background:#ffffff20;border:1px solid #ffffff55;color:white}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.pill{background:#ffffff1c;border:1px solid #ffffff4d;border-radius:999px;padding:5px 12px;font-size:.86rem}nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 3px 12px #10243a0b;overflow:auto;white-space:nowrap;padding:10px max(12px,calc((100% - 1180px)/2))}nav a{display:inline-block;text-decoration:none;color:var(--navy);font-weight:700;font-size:.88rem;padding:7px 10px;border-radius:8px}nav a:hover{background:var(--cyan)}.nav-tools{display:flex;gap:8px;align-items:center;min-width:260px;padding:5px 8px}.nav-tools input{width:100%;min-width:180px;border:1px solid var(--line);border-radius:8px;padding:9px 10px;background:var(--paper);color:var(--ink)}#readingProgress{position:fixed;top:0;left:0;height:4px;background:#4bc0ff;width:0;z-index:30;transition:width .1s}#topButton{position:fixed;right:18px;bottom:18px;z-index:20;border-radius:50%;width:46px;height:46px;padding:0;box-shadow:var(--shadow);font-size:1.2rem}main{max-width:1180px;margin:26px auto;padding:0 18px 60px}.hero-grid,.two,.three{display:grid;gap:18px}.hero-grid{grid-template-columns:1.5fr 1fr}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.card,section{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:var(--shadow);transition:transform .18s,border-color .18s}.card:hover{border-color:#8bbfe0}section h2{margin:0 0 14px;color:var(--navy);font-size:1.55rem}h3{color:#174d7a;margin:1.1rem 0 .4rem}p{margin:.45rem 0 .85rem}.muted,small{color:var(--muted)}.callout{border-left:4px solid var(--blue);background:#eef8ff;padding:12px 15px;border-radius:8px;margin:12px 0}.warn{border-left-color:#d28a00;background:#fff8e7}.good{border-left-color:var(--green);background:#eaf8f0}table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}th{background:#edf4fa;color:var(--navy)}.diagram{background:#f8fbff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0;overflow-x:auto}.diagram svg{display:block;width:100%;height:auto;min-width:550px}.flowline{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}.node{border:2px solid #2776a8;background:#e8f5fc;border-radius:10px;padding:12px 14px;text-align:center;font-weight:700;min-width:120px}.arrow{font-weight:900;color:#1769aa;font-size:1.3rem}pre{background:#102033;color:#e5f1ff;padding:16px;border-radius:12px;overflow:auto;line-height:1.55;font-size:.9rem;tab-size:2}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,td code,li code{background:#eef3f7;padding:2px 5px;border-radius:4px;color:#8b2f16}.tag{display:inline-block;border-radius:6px;padding:2px 7px;background:#eaf1f7;color:#25445e;font-size:.78rem;font-weight:800}.quiz-q{border:1px solid var(--line);padding:15px;border-radius:12px;margin:13px 0}.quiz-q legend{font-weight:750}.option{display:block;padding:5px 7px;border-radius:6px}.option:hover{background:#f2f7fb}.feedback{padding:10px;border-radius:8px;margin-top:8px}.correct{background:#e8f7ee;color:#125b39}.incorrect{background:#fff0ef;color:#8d1d17}.unanswered{background:#fff8e7;color:#765000}button{background:var(--blue);color:white;border:0;border-radius:9px;padding:10px 15px;font-weight:750;cursor:pointer;margin:4px 6px 4px 0}button.secondary{background:#e8eef4;color:var(--navy)}button:hover{filter:brightness(.95)}details{border:1px solid var(--line);border-radius:10px;margin:9px 0;padding:12px 14px}summary{cursor:pointer;font-weight:750;color:#174d7a}details p{margin-bottom:0}.score{font-size:1.2rem;font-weight:800;margin:12px 0}.kbd{border:1px solid #b6c3d0;border-bottom-width:3px;border-radius:5px;padding:1px 6px;background:white;font-size:.86em}.small{font-size:.9rem}.footer{color:var(--muted);text-align:center;padding:25px}.sim-console{background:#081321;color:#d8f3ff;border-radius:12px;padding:14px;min-height:120px;font: .9rem/1.6 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow:auto}.sim-actions{display:flex;flex-wrap:wrap;gap:5px}.sim-actions button{font-size:.85rem}.progress-note{font-size:.88rem;color:var(--muted)}.section-hidden{display:none!important}.search-count{font-size:.8rem;color:var(--muted);padding:0 8px}ul,ol{padding-left:24px}li{margin:.25rem 0}.formula{font-family:Georgia,serif;font-size:1.2rem;background:#f1f7fb;border-radius:8px;padding:10px 14px;display:inline-block;margin:5px 0}.hide{display:none}
+@media(max-width:760px){.hero-grid,.two,.three{grid-template-columns:1fr}main{padding:0 10px 35px}.card,section{padding:16px}header{padding:28px 18px}table{display:block;overflow-x:auto}}
+@media print{body{background:white;font-size:10.5pt}nav,button{display:none!important}main{max-width:none;padding:0}header{background:white;color:#10243a;padding:10px 0;border-bottom:2px solid #10243a}header p,.pill{color:#10243a}.pill{border-color:#aaa;background:white}section,.card{box-shadow:none;break-inside:avoid;border-color:#aaa;padding:12px;margin-bottom:10px}details{break-inside:avoid}details>*{display:block!important}pre{white-space:pre-wrap;word-break:break-word;background:#f2f2f2;color:#111}.diagram{break-inside:avoid}a{color:#111;text-decoration:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">ECE • Embedded Systems & Wireless Communication</div>
+<h1>Messaging (SMS) Using GSM</h1>
+<p>A practical learning lab covering GSM architecture, UART interfacing, AT commands, calculations, troubleshooting, GATE-style practice and interview preparation.</p>
+<div class="header-tools"><button type="button" id="themeToggle" aria-label="Toggle dark mode">☾ Dark mode</button></div><div class="meta"><span class="pill">B.E./B.Tech ECE</span><span class="pill">Arduino UNO / ESP32</span><span class="pill">SIM800L / SIM900A*</span><span class="pill">Offline-ready HTML</span></div>
+<p><small>*Confirm the module variant, supported bands and local network compatibility before purchasing or powering hardware.</small></p>
+</header>
+<div id="readingProgress" aria-hidden="true"></div><nav aria-label="Main navigation">
+<a href="#intro">Introduction</a><a href="#architecture">Architecture</a><a href="#hardware">Hardware</a><a href="#working">Working</a><a href="#commands">AT Commands</a><a href="#calculations">Calculations</a><a href="#solved">Solved Problems</a><a href="#gate">GATE Practice</a><a href="#quiz">Topic Quiz</a><a href="#interview">Interviews</a><a href="#applications">Applications</a><a href="#troubleshooting">Troubleshooting</a><a href="#revision">Revision</a>
+</nav>
+<main>
+<div class="hero-grid">
+<div class="card">
+<h2 id="intro">1. Introduction and learning objectives</h2>
+<p><b>GSM (Global System for Mobile Communications)</b> is a cellular communication standard. <b>SMS (Short Message Service)</b> lets a device submit a short text message through a mobile network for delivery to a recipient. In an embedded system, a microcontroller sends commands to a GSM modem over a serial interface; the modem handles SIM/network access and SMS submission.</p>
+<h3>By the end, you should be able to</h3>
+<ul><li>Describe the GSM network elements involved in SMS.</li><li>Connect a controller and modem using safe UART logic levels and power.</li><li>Use AT commands to check readiness and submit a text message.</li><li>Calculate UART bit timing and transmission time.</li><li>Diagnose common SIM, network, wiring and power faults.</li></ul>
+</div>
+<div class="card">
+<h2>Prerequisites</h2>
+<ul><li>Digital logic and serial communication</li><li>Microcontroller GPIO and Arduino IDE basics</li><li>Voltage, current, grounding and regulated supplies</li><li>Basic cellular network concepts</li></ul>
+<div class="callout"><b>Key distinction:</b> an <code>OK</code> or <code>+CMGS</code> response usually indicates command acceptance or SMS submission—not proof that the recipient has read or even received the message.</div>
+</div>
+</div>
+<section>
+<h2>2. Terminology and related technologies</h2>
+<table><thead><tr><th>Term</th><th>Meaning / function</th></tr></thead><tbody>
+<tr><td>GSM</td><td>Global System for Mobile Communications; a cellular system originally designed for digital voice and related services.</td></tr><tr><td>SMS</td><td>Short Message Service, a store-and-forward messaging service.</td></tr><tr><td>SIM</td><td>Subscriber Identity Module; stores subscriber credentials and related service information.</td></tr><tr><td>GSM modem/module</td><td>Radio/cellular interface controlled by a host through commands, commonly over UART.</td></tr><tr><td>MS</td><td>Mobile Station: mobile equipment plus subscriber identity module in traditional GSM terminology.</td></tr><tr><td>BTS / BSC</td><td>Base Transceiver Station communicates over radio; Base Station Controller manages radio resources for multiple BTSs in classic GSM architecture.</td></tr><tr><td>MSC</td><td>Mobile Switching Centre; switching and mobility-related functions in the circuit-switched core.</td></tr><tr><td>HLR / VLR</td><td>Home Location Register stores subscriber/service records; Visitor Location Register holds temporary information for subscribers in an area.</td></tr><tr><td>SMSC</td><td>Short Message Service Centre stores/forwards submitted messages and attempts delivery according to network rules.</td></tr><tr><td>AT commands</td><td>Text commands sent by a terminal/controller to configure and control a modem.</td></tr><tr><td>UART</td><td>Universal Asynchronous Receiver/Transmitter; serial data interface using agreed framing and baud rate.</td></tr><tr><td>TX / RX</td><td>Transmit output and receive input. Connect one device's TX to the other device's RX.</td></tr><tr><td>Baud rate</td><td>Symbols per second. For binary UART where each symbol represents one bit, baud and bit rate are numerically equal.</td></tr><tr><td>Network registration</td><td>Modem's successful registration with a compatible cellular network; separate from powering on or SIM detection.</td></tr><tr><td>Text / PDU mode</td><td>SMS text mode uses human-readable message entry; PDU mode sends encoded protocol data units and offers more control.</td></tr><tr><td>Delivery report</td><td>Network report, if requested and supported, about message delivery status; not a read receipt.</td></tr>
+</tbody></table>
+<table><thead><tr><th>Technology</th><th>Typical role</th><th>Range / dependency</th><th>SMS comparison</th></tr></thead><tbody>
+<tr><td>GSM cellular</td><td>Cellular voice and supported data services</td><td>Operator coverage and compatible radio bands</td><td>Network technology; SMS is a service, not a radio module.</td></tr><tr><td>GPRS</td><td>Packet data over legacy GSM networks</td><td>Operator support and data configuration</td><td>Packet data; APN settings apply to data sessions, not ordinarily to basic SMS setup.</td></tr><tr><td>SMS</td><td>Short store-and-forward messages</td><td>Compatible service, coverage and recipient availability</td><td>May arrive after delay; payload is small.</td></tr><tr><td>Wi-Fi</td><td>Local networking / internet access</td><td>Access point and network/internet service</td><td>Can send app messages through a server; not itself SMS.</td></tr><tr><td>Bluetooth</td><td>Short-range device connection</td><td>Nearby paired device</td><td>Not a cellular SMS service by itself.</td></tr><tr><td>Cellular voice call</td><td>Real-time voice service</td><td>Operator voice support</td><td>Different service and call setup path from SMS.</td></tr></tbody></table>
+</section>
+<section id="architecture">
+<h2>3. GSM architecture and communication diagrams</h2>
+<h3>A. Embedded SMS system path</h3>
+<div class="diagram"><div class="flowline"><div class="node">Sensor / Event</div><span class="arrow">→</span><div class="node">Arduino / ESP32</div><span class="arrow">UART</span><div class="node">GSM Module + SIM</div><span class="arrow">Radio</span><div class="node">Cellular Network / SMSC</div><span class="arrow">→</span><div class="node">Recipient Phone</div></div><p class="small muted">Illustrative logical path. Real SMS routing may involve additional operator systems and interconnects; the exact route varies.</p></div>
+<h3>B. Simplified traditional GSM architecture</h3>
+<div class="diagram"><svg viewBox="0 0 900 300" role="img" aria-label="Simplified GSM architecture"><defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1769aa"/></marker></defs>
+<g font-family="Arial" font-size="15" text-anchor="middle"><rect x="18" y="105" width="120" height="65" rx="9" fill="#e8f5fc" stroke="#1769aa" stroke-width="2"/><text x="78" y="132">Mobile</text><text x="78" y="152">Station (MS)</text>
+<rect x="190" y="105" width="115" height="65" rx="9" fill="#e8f5fc" stroke="#1769aa" stroke-width="2"/><text x="247" y="142">BTS</text>
+<rect x="355" y="105" width="115" height="65" rx="9" fill="#e8f5fc" stroke="#1769aa" stroke-width="2"/><text x="412" y="142">BSC</text>
+<rect x="520" y="105" width="125" height="65" rx="9" fill="#e8f5fc" stroke="#1769aa" stroke-width="2"/><text x="582" y="142">MSC</text>
+<rect x="700" y="25" width="170" height="65" rx="9" fill="#fff4d8" stroke="#b98413" stroke-width="2"/><text x="785" y="52">HLR / VLR</text><text x="785" y="72" font-size="12">Subscriber / location data</text>
+<rect x="700" y="190" width="170" height="65" rx="9" fill="#e8f7ee" stroke="#18794e" stroke-width="2"/><text x="785" y="218">SMSC</text><text x="785" y="238" font-size="12">Store and forward SMS</text>
+<path d="M138 137 H187 M305 137 H352 M470 137 H517" stroke="#1769aa" stroke-width="2.5" fill="none" marker-end="url(#arr)"/><path d="M645 118 L700 75" stroke="#1769aa" stroke-width="2.5" fill="none" marker-end="url(#arr)"/><path d="M645 153 L700 210" stroke="#1769aa" stroke-width="2.5" fill="none" marker-end="url(#arr)"/><text x="450" y="205" fill="#5b6b7d" font-size="12">Simplified conceptual connections</text><text x="450" y="226" fill="#5b6b7d" font-size="12">Not every SMS follows one identical route</text></g></svg></div>
+<table><tr><th>Block</th><th>Purpose</th></tr><tr><td>MS</td><td>Mobile device and subscriber identity.</td></tr><tr><td>BTS</td><td>Radio link between mobile station and network.</td></tr><tr><td>BSC</td><td>Coordinates radio resources and BTSs in traditional GSM.</td></tr><tr><td>MSC</td><td>Switching/mobility functions and interconnection to other networks.</td></tr><tr><td>HLR / VLR</td><td>Subscriber profile and temporary location-related records.</td></tr><tr><td>SMSC</td><td>Accepts and stores messages, then retries/forwards according to network rules.</td></tr></table>
+<h3>C. SMS sequence</h3>
+<div class="diagram"><ol><li>Controller opens UART and sends <code>AT</code>.</li><li>Modem responds; controller checks SIM readiness and registration.</li><li>Controller selects text mode and starts <code>AT+CMGS</code>.</li><li>Modem prompts with <code>&gt;</code>; controller sends body and Ctrl+Z.</li><li>Modem reports submission status; network processes the SMS.</li><li>Recipient delivery depends on routing, service and availability.</li></ol></div>
+</section>
+<section id="hardware">
+<h2>4. Hardware interfacing and safe connections</h2>
+<div class="callout warn"><b>Power warning:</b> do not power a SIM800L/SIM900A board directly from an Arduino 5 V pin by assumption. Exact voltage range, burst/peak current, regulator and logic thresholds depend on the specific breakout/module. Read that module's datasheet and board documentation first.</div>
+<h3>A. Arduino UNO + compatible GSM module</h3>
+<div class="diagram"><svg viewBox="0 0 850 300" role="img" aria-label="Arduino UNO to GSM module wiring diagram"><defs><marker id="wirearr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1769aa"/></marker></defs><g font-family="Arial" font-size="14"><rect x="30" y="45" width="250" height="200" rx="12" fill="#e9f2e9" stroke="#31734b" stroke-width="2"/><text x="155" y="75" text-anchor="middle" font-size="20" font-weight="bold">Arduino UNO</text><text x="50" y="115">D10 (RX via SoftwareSerial)</text><text x="50" y="150">D11 (TX via SoftwareSerial)</text><text x="50" y="185">GND</text><rect x="530" y="45" width="280" height="200" rx="12" fill="#e8f5fc" stroke="#1769aa" stroke-width="2"/><text x="670" y="75" text-anchor="middle" font-size="20" font-weight="bold">GSM module</text><text x="550" y="115">TXD</text><text x="550" y="150">RXD</text><text x="550" y="185">GND</text><path d="M280 110 H500 V110 H530" stroke="#1769aa" stroke-width="3" fill="none" marker-end="url(#wirearr)"/><text x="400" y="100" text-anchor="middle" fill="#1769aa">UNO RX ← GSM TX</text><path d="M280 145 H500 V145 H530" stroke="#b42318" stroke-width="3" fill="none" marker-end="url(#wirearr)"/><text x="405" y="137" text-anchor="middle" fill="#b42318">UNO TX → level shift → GSM RX</text><path d="M280 180 H530" stroke="#333" stroke-width="3"/><text x="405" y="200" text-anchor="middle">Common GND</text><rect x="585" y="260" width="170" height="28" rx="6" fill="#fff4d8" stroke="#b98413"/><text x="670" y="279" text-anchor="middle">External rated supply</text><path d="M670 245 V260" stroke="#b98413" stroke-width="3"/><text x="35" y="270" fill="#5b6b7d" font-size="12">Illustrative UART wiring; confirm board labels and voltage levels.</text></g></svg></div>
+<table><tr><th>Arduino UNO</th><th>GSM module</th><th>Notes</th></tr><tr><td>D10 (software serial RX)</td><td>TXD</td><td>GSM TX drives controller RX; confirm voltage compatibility.</td></tr><tr><td>D11 (software serial TX)</td><td>RXD</td><td>Controller TX to modem RX; use a suitable level shifter/divider if required.</td></tr><tr><td>GND</td><td>GND</td><td>Common ground is required when supplies are separate.</td></tr><tr><td>External supply</td><td>Module power input</td><td>Use the specified voltage, regulator and burst-current capability for the exact board.</td></tr><tr><td>—</td><td>SIM slot, antenna, status LED</td><td>Install a compatible active SIM, attach correct antenna, observe status indication.</td></tr></table>
+<h3>B. ESP32 alternative</h3>
+<table><tr><th>ESP32 example</th><th>GSM module</th><th>Design note</th></tr><tr><td>GPIO 16 (RX2, example)</td><td>TXD</td><td>UART2 receive; select pins supported by your ESP32 board.</td></tr><tr><td>GPIO 17 (TX2, example)</td><td>RXD</td><td>Check both devices' logic levels. ESP32 GPIO is not 5-V tolerant.</td></tr><tr><td>GND</td><td>GND</td><td>Shared reference ground.</td></tr><tr><td>Separate suitable supply</td><td>Module power</td><td>Never assume ESP32 3.3-V/5-V rail can supply modem current bursts.</td></tr></table>
+<p>Use a hardware UART such as <code>Serial2</code> where available, leaving USB serial (<code>Serial</code>) for logs and programming. GPIO assignments vary by board; verify the board pinout.</p>
+</section>
+<section id="working">
+<h2>5. Working principle, state flow and simulation</h2>
+<ol><li><b>Initialize:</b> start controller UART at the configured baud rate.</li><li><b>Check modem:</b> send <code>AT</code> and wait for a valid response.</li><li><b>Check SIM:</b> use <code>AT+CPIN?</code>; resolve a PIN request securely if required.</li><li><b>Register:</b> query registration with a supported command such as <code>AT+CREG?</code>. A SIM-ready response alone does not prove registration.</li><li><b>Check signal:</b> <code>AT+CSQ</code> gives a reported signal-quality value; 99 often means unknown/not detectable, not “99% signal.”</li><li><b>Configure SMS:</b> set text mode with <code>AT+CMGF=1</code> where supported.</li><li><b>Submit:</b> issue <code>AT+CMGS</code>, wait for the prompt, send message text and Ctrl+Z (ASCII 26).</li><li><b>Interpret result:</b> read <code>+CMGS</code>/<code>OK</code> or an error. A delivery report is separate and may not be available.</li></ol>
+<div class="diagram"><h3>Module state diagram (conceptual)</h3><div class="flowline"><div class="node">Power off</div><span class="arrow">→</span><div class="node">Boot / AT ready</div><span class="arrow">→</span><div class="node">SIM ready</div><span class="arrow">→</span><div class="node">Network registered</div><span class="arrow">→</span><div class="node">SMS submitted</div></div><p class="small muted">Any stage may fail; diagnose the relevant layer before retrying. Repeated retries should use limits/backoff to avoid duplicate messages.</p></div>
+<h3>UART frame and timing (8-N-1)</h3>
+<div class="diagram"><svg viewBox="0 0 850 160" role="img" aria-label="UART 8-N-1 frame illustration"><g font-family="Arial" font-size="13" text-anchor="middle"><text x="18" y="24" text-anchor="start">Idle = logic high</text><path d="M30 45 H100 V105 H180 V45 H260 V105 H340 V45 H420 V105 H500 V45 H580 V105 H660 V45 H740 V105 H820" stroke="#1769aa" stroke-width="3" fill="none"/><rect x="100" y="48" width="80" height="54" fill="#ffe6c7" stroke="#b98413"/><rect x="180" y="48" width="560" height="54" fill="#e8f5fc" stroke="#1769aa"/><rect x="740" y="48" width="80" height="54" fill="#e8f7ee" stroke="#18794e"/><text x="140" y="78">Start</text><text x="460" y="78">8 data bits (LSB first)</text><text x="780" y="78">Stop</text><text x="140" y="125">0</text><text x="460" y="125">Data</text><text x="780" y="125">1</text><text x="425" y="151">One frame = 1 start + 8 data + 1 stop = 10 bit periods; no parity</text></g></svg></div>
+<h3>Simulation guidance</h3>
+<p>Wokwi may be useful for controller-side logic and mocked UART responses, but do not assume a real SIM800L/SIM900A cellular modem is natively supported. If the actual modem is unavailable, test parsing and command flow with a mock serial device or serial terminal; only physical compatible hardware and service can verify real network SMS delivery.</p>
+<pre><code>Illustrative serial log (not a real transmission):
+TX: AT
+RX: OK
+TX: AT+CPIN?
+RX: +CPIN: READY
+RX: OK
+TX: AT+CREG?
+RX: +CREG: 0,1
+RX: OK
+TX: AT+CMGF=1
+RX: OK
+TX: AT+CMGS="&lt;DESTINATION_NUMBER&gt;"
+RX: &gt;
+TX: Test message from GSM module&lt;Ctrl+Z&gt;
+RX: +CMGS: 23
+RX: OK
+</code></pre>
+<div class="callout warn">The log is illustrative. It does not demonstrate an actual SMS, and response values vary by modem firmware and network.</div>
+</section>
+<section id="commands">
+<h2>6. AT command reference and Arduino example</h2>
+<table><tr><th>Command</th><th>Purpose</th><th>Typical note</th></tr><tr><td><code>AT</code></td><td>Test command channel</td><td>Often returns <code>OK</code>.</td></tr><tr><td><code>ATE0</code></td><td>Disable command echo</td><td>Useful for simpler parsing.</td></tr><tr><td><code>AT+CPIN?</code></td><td>Check SIM PIN/readiness</td><td>May report <code>READY</code> or request a PIN.</td></tr><tr><td><code>AT+CSQ</code></td><td>Query signal quality</td><td>Read the module manual for interpretation.</td></tr><tr><td><code>AT+CREG?</code></td><td>Query circuit-switched registration status where supported</td><td>Other technologies/firmware may use additional registration commands.</td></tr><tr><td><code>AT+CMGF=1</code></td><td>Select SMS text mode</td><td>Use supported mode for the module.</td></tr><tr><td><code>AT+CMGS="&lt;number&gt;"</code></td><td>Begin SMS submission</td><td>Wait for <code>&gt;</code> prompt before body.</td></tr><tr><td><code>AT+CMGL="ALL"</code></td><td>List stored messages in text mode on many modules</td><td>Supported parameters vary.</td></tr><tr><td><code>AT+CMGR=&lt;index&gt;</code></td><td>Read a stored message</td><td>Index comes from module's message list.</td></tr><tr><td><code>AT+CMGD=&lt;index&gt;</code></td><td>Delete a stored message</td><td>Check parameters before deleting.</td></tr></table>
+<h3>Interactive AT-command practice console</h3>
+<p class="small">Try common commands to see <b>mock responses</b>. This local teaching simulator does not connect to a modem or cellular network.</p>
+<div class="card"><div class="sim-actions"><button type="button" data-at="AT">AT</button><button type="button" data-at="AT+CPIN?">AT+CPIN?</button><button type="button" data-at="AT+CSQ">AT+CSQ</button><button type="button" data-at="AT+CREG?">AT+CREG?</button><button type="button" data-at="AT+CMGF=1">AT+CMGF=1</button><button type="button" data-at='AT+CMGS="&lt;DESTINATION_NUMBER&gt;"'>AT+CMGS</button><button type="button" class="secondary" id="clearConsole">Clear</button></div><div id="simConsole" class="sim-console" aria-live="polite">GSM Mock Console v1.0
+Ready. Select a command above.
+[SIMULATION ONLY — no real modem connected]</div><p class="progress-note">Teaching note: real response values vary by module firmware, SIM and network state.</p></div>
+<h3>Arduino UNO example (SoftwareSerial)</h3>
+<p class="small">Use a level-compatible modem, separate suitable supply, shared ground, correct antenna and an active SIM. Replace the destination placeholder with a number you are authorized to message. This example waits for the prompt but is intentionally a basic teaching example, not production-grade response parsing.</p>
+<pre><code>#include &lt;SoftwareSerial.h&gt;
+
+// UNO D10 receives GSM TX; UNO D11 transmits to GSM RX.
+// Confirm logic-level compatibility and the exact module power requirements.
+SoftwareSerial gsm(10, 11); // RX, TX
+const char DESTINATION[] = "&lt;DESTINATION_NUMBER&gt;";
+
+void sendAT(const char *cmd, unsigned long waitMs = 1000) {
+  gsm.println(cmd);
+  unsigned long start = millis();
+  while (millis() - start &lt; waitMs) {
+    while (gsm.available()) Serial.write(gsm.read());
+  }
+}
+
+void setup() {
+  Serial.begin(9600);  // USB serial monitor
+  gsm.begin(9600);     // Must match modem UART configuration
+  delay(1500);
+  sendAT("AT");
+  sendAT("ATE0");
+  sendAT("AT+CPIN?");
+  sendAT("AT+CREG?");
+  sendAT("AT+CMGF=1");
+  gsm.print("AT+CMGS=\\"");
+  gsm.print(DESTINATION);
+  gsm.println("\\"");
+  // Wait for '>' prompt in a robust implementation before sending body.
+  delay(1000); // Simple demonstration only; prompt timing is not guaranteed.
+  gsm.print("GSM SMS test from embedded controller");
+  gsm.write(26); // Ctrl+Z / ASCII 26 submits the SMS
+  delay(5000);
+  while (gsm.available()) Serial.write(gsm.read());
+}
+void loop() {
+  // Add event logic, bounded retries, and response parsing as required.
+}
+</code></pre>
+<div class="callout warn">For robust firmware, replace fixed delays with timeouts and response parsing; verify the <code>&gt;</code> prompt, <code>+CMGS</code> and error responses. Do not repeatedly send messages on every loop iteration.</div>
+<h3>ESP32 UART2 example fragment</h3>
+<pre><code>// Example pins only; confirm your ESP32 board pinout.
+HardwareSerial GSM(2);
+void setup() {
+  Serial.begin(115200);          // USB debug
+  GSM.begin(9600, SERIAL_8N1, 16, 17); // RX, TX
+  GSM.println("AT");
+}
+void loop() {
+  while (GSM.available()) Serial.write(GSM.read());
+  while (Serial.available()) GSM.write(Serial.read()); // serial bridge for testing
+}
+</code></pre>
+</section>
+<section id="calculations">
+<h2>7. Equations and engineering calculations</h2>
+<div class="two"><div class="card"><h3>UART bit duration</h3><div class="formula">T<sub>b</sub> = 1 / R<sub>b</sub></div><p><code>T_b</code> is seconds per bit; <code>R_b</code> is bits per second for binary UART. At 9600 bps: 104.17 μs/bit. At 115200 bps: 8.68 μs/bit.</p></div><div class="card"><h3>UART frame time</h3><div class="formula">T ≈ (N × F) / R<sub>b</sub></div><p><code>N</code> is data bytes; <code>F</code> is frame bits per byte. For 8-N-1, F = 10. This estimates serial-wire time, not cellular delivery latency.</p></div><div class="card"><h3>8-N-1 payload efficiency</h3><div class="formula">η = 8/10 × 100% = 80%</div><p>Eight payload bits are sent using ten total bits: one start and one stop bit, no parity. This is UART framing efficiency, not GSM network efficiency.</p></div><div class="card"><h3>Electrical power</h3><div class="formula">P = V × I</div><p>Power in watts equals voltage in volts multiplied by current in amperes. Use the actual module's voltage and peak/burst-current specification for supply design.</p></div></div>
+<h3>SMS capacity</h3><p>A single SMS commonly holds up to 160 characters when GSM 7-bit default alphabet encoding applies, or 70 UCS-2 characters for many Unicode messages. Concatenation headers reduce per-segment capacity; special characters, language tables and operator behaviour can change the count. These are not limits for every arbitrary string.</p>
+</section>
+<section id="solved">
+<h2>8. Solved numerical problems</h2>
+<h3>Example 1 — Bit duration at 9600 bps</h3><p><b>Given:</b> R = 9600 bits/s. <b>Find:</b> bit duration.</p><p>Formula: T = 1/R = 1/9600 s = 0.00010417 s ≈ <b>104.17 μs</b>.</p>
+<h3>Example 2 — 50 bytes at 9600 bps, 8-N-1</h3><p>Each byte consumes 10 serial bits. Total = 50 × 10 = 500 bits. Time = 500/9600 = 0.05208 s ≈ <b>52.1 ms</b>, excluding software gaps and response time.</p>
+<h3>Example 3 — Compare 9600 and 115200 bps for 50 bytes</h3><p>At 9600: 500/9600 = 52.08 ms. At 115200: 500/115200 = 4.34 ms. Ideal wire-time ratio = 12×. This does not mean the cellular SMS is delivered 12× faster.</p>
+<h3>Example 4 — SMS character capacity</h3><p>Assume a message uses only GSM 7-bit default alphabet characters and is 150 characters long. Since 150 ≤ 160, it fits in one standard single-part SMS under that assumption. If the message requires UCS-2 and has 75 characters, it exceeds the common 70-character single-part limit and generally needs concatenation.</p>
+<h3>Example 5 — Illustrative power calculation</h3><p>For a hypothetical supply condition of 4.0 V and 2.0 A instantaneous current, P = 4.0 × 2.0 = <b>8 W</b> instantaneous. This is a calculation example, not a universal SIM800L/SIM900A supply specification. Use the exact module documentation and account for current bursts, wiring drop and regulator stability.</p>
+<h3>GATE-style shortcut</h3><p>For 8-N-1 UART, quickly estimate time as <code>10 × number of bytes ÷ baud rate</code>. At 10,000 bps, 100 bytes take about 0.1 s of UART framing time. Do not use this to estimate network registration or SMS delivery time.</p>
+</section>
+<section id="gate">
+<h2>9. GATE-style practice questions</h2>
+<p class="muted">Original practice questions for revision; these are not represented as actual previous-year GATE questions.</p>
+<details><summary>Q1 • Easy — What does SMS stand for?</summary><p><b>Answer:</b> Short Message Service. It is a store-and-forward messaging service.</p></details>
+<details><summary>Q2 • Easy — Which element commonly stores and forwards SMS messages?</summary><p><b>Answer:</b> SMSC. It may retain a message and retry delivery according to network rules.</p></details>
+<details><summary>Q3 • Easy — For binary UART, bit rate is 9600 bps. What is bit duration?</summary><p><b>Answer:</b> 1/9600 = 104.17 μs.</p></details>
+<details><summary>Q4 • Moderate — How many bits are sent per byte using 8-N-1 framing?</summary><p><b>Answer:</b> 10 bits: one start, eight data and one stop bit.</p></details>
+<details><summary>Q5 • Moderate — What is the correct UART wiring?</summary><p><b>Answer:</b> Controller TX to modem RX and controller RX to modem TX, with common ground and compatible logic levels.</p></details>
+<details><summary>Q6 • Moderate — What does AT+CMGF=1 usually select?</summary><p><b>Answer:</b> SMS text mode, where supported.</p></details>
+<details><summary>Q7 • Moderate — Does AT+CPIN? returning READY prove network registration?</summary><p><b>Answer:</b> No. It indicates SIM readiness; registration must be checked separately.</p></details>
+<details><summary>Q8 • Moderate — A 20-byte 8-N-1 payload at 9600 bps takes approximately how long?</summary><p><b>Answer:</b> 20 × 10 / 9600 = 20.83 ms, excluding software gaps.</p></details>
+<details><summary>Q9 • Difficult — Why might +CMGS be shown while recipient delivery is unconfirmed?</summary><p><b>Answer:</b> It commonly confirms submission to the network/modem path, not final recipient delivery. A supported delivery report is a separate mechanism.</p></details>
+<details><summary>Q10 • Difficult — The modem resets when sending. Name the first hardware checks.</summary><p><b>Answer:</b> Supply voltage at the module during bursts, supply peak-current capability, regulator stability, wiring/ground drops, antenna and board-specific power requirements.</p></details>
+<details><summary>Q11 • Moderate — Which setting is normally irrelevant to basic SMS-only operation?</summary><p><b>Answer:</b> APN settings are typically for packet-data services such as GPRS, not ordinarily required for basic SMS submission.</p></details>
+<details><summary>Q12 • Difficult — Why may a modem fail to register despite a working SIM?</summary><p><b>Answer:</b> Coverage, incompatible frequency bands, unsupported/retired network technology, account provisioning, antenna, SIM/service restrictions or local operator support.</p></details>
+</section>
+<section id="quiz">
+<h2>10. Interactive 10-question topic quiz</h2>
+<p>Choose one answer for each question, then select <b>Check Answers</b>. Unanswered questions are scored as unanswered rather than silently marked correct.</p>
+<form id="topicQuiz">
+<div id="topicQuestions"></div>
+<button type="button" id="checkTopic">Check Answers</button><button type="button" class="secondary" id="resetTopic">Reset Quiz</button>
+<div id="topicResult" class="score" aria-live="polite"></div>
+</form>
+</section>
+<section>
+<h2>11. GATE interactive mini-quiz</h2>
+<p>This separate five-question quick check provides instant scoring and explanations.</p>
+<form id="gateQuiz"><div id="gateQuestions"></div><button type="button" id="checkGate">Check Answers</button><button type="button" class="secondary" id="resetGate">Reset Quiz</button><div id="gateResult" class="score" aria-live="polite"></div></form>
+</section>
+<section id="interview">
+<h2>12. Core electronics and embedded systems interview questions</h2>
+<details><summary>1. What are GSM and SMS?</summary><p>GSM is a cellular system standard; SMS is a short-message service supported by a network. A module provides the embedded controller an interface to cellular services.</p></details>
+<details><summary>2. What is the role of a GSM module?</summary><p>It handles cellular radio/network access, SIM interaction and modem commands, allowing a microcontroller to submit SMS or use other supported services.</p></details>
+<details><summary>3. What are AT commands?</summary><p>Commands sent over a control interface to configure/query a modem. The controller should parse responses and errors rather than assuming every command succeeded.</p></details>
+<details><summary>4. How do you send an SMS?</summary><p>Check modem, SIM and registration; set <code>AT+CMGF=1</code>; issue <code>AT+CMGS</code> with destination; wait for prompt; send body and Ctrl+Z; inspect response and any supported delivery report.</p></details>
+<details><summary>5. Why cross-connect TX and RX?</summary><p>One device's transmit output must feed the other device's receive input. Ground references must also be shared for ordinary UART wiring.</p></details>
+<details><summary>6. Why might an external supply be required?</summary><p>Cellular transmission can create short current bursts. A controller-board regulator may not sustain those bursts without voltage droop or resets. Follow the exact module specification.</p></details>
+<details><summary>7. Text mode versus PDU mode?</summary><p>Text mode is simpler for basic human-readable messages. PDU mode uses encoded protocol units and provides more control over encoding and message parameters, but requires correct encoding/decoding.</p></details>
+<details><summary>8. How do you check registration?</summary><p>Use a supported command such as <code>AT+CREG?</code> for classic circuit-switched registration and interpret the returned status according to the modem manual. Some technologies expose other registration commands too.</p></details>
+<details><summary>9. Why can OK appear without delivery?</summary><p>OK may confirm that a command was accepted. +CMGS generally reports submission status. Network delivery and recipient availability are separate; request/check a supported delivery report if needed.</p></details>
+<details><summary>10. How do you debug a failed SMS?</summary><p>Check power during transmit, antenna, SIM readiness, registration, signal, bands/network support, UART wiring/levels/baud, SMS mode, destination format, service restrictions and exact CMS error.</p></details>
+<details><summary>11. UART baud rate versus cellular speed?</summary><p>UART baud controls the local serial link between controller and modem. Cellular air-interface and network processing use different mechanisms; UART timing cannot predict SMS delivery latency.</p></details>
+<details><summary>12. What if the module restarts during sending?</summary><p>Measure supply voltage at the module under load, verify peak-current capability and low-resistance wiring, inspect grounding and regulator transient response, and check for shorts or thermal issues.</p></details>
+<details><summary>13. Can a 5-V UNO TX connect directly to any modem RX?</summary><p>No. Logic thresholds vary. Check both datasheets and use a suitable level shifter or divider where required. ESP32 GPIOs are not 5-V tolerant.</p></details>
+<details><summary>14. What are practical reliability measures?</summary><p>Use timeouts, bounded retries with backoff, registration checks, event IDs or duplicate prevention, persistent status logging, and avoid sending repeated alerts every loop iteration.</p></details>
+<details><summary>15. Follow-up: how would you test without cellular hardware?</summary><p>Mock the modem's UART responses to validate state logic and error handling, then test on physical hardware with a supported SIM/network. A mock test cannot prove radio registration or real SMS delivery.</p></details>
+</section>
+<section id="applications">
+<h2>13. Applications and industry relevance</h2>
+<table><tr><th>Application</th><th>Data sent</th><th>Why SMS can fit</th></tr><tr><td>Remote monitoring</td><td>Threshold crossed, equipment state</td><td>Small alert payload; can work without a local Wi-Fi network if cellular service is available.</td></tr><tr><td>Industrial faults</td><td>Machine ID, fault code, timestamp</td><td>Simple maintenance notification; should be paired with local safety interlocks.</td></tr><tr><td>Agriculture</td><td>Water level, soil threshold, pump status</td><td>Useful for remote locations with cellular coverage.</td></tr><tr><td>Home security</td><td>Door/window event, alarm status</td><td>Direct phone notification; needs power backup and reliable retry logic.</td></tr><tr><td>Patient/emergency monitoring</td><td>Alert status and essential readings</td><td>Can be a supplementary alert path, not a sole safety-critical channel.</td></tr><tr><td>Meter reading</td><td>Meter value or exception</td><td>Compact periodic data, though packet data may be cheaper for frequent reporting.</td></tr><tr><td>Vehicle / asset tracking</td><td>Location or status summary</td><td>SMS can send sparse updates; continuous tracking usually needs data service.</td></tr><tr><td>Power/environment systems</td><td>Fault, temperature, pollution threshold</td><td>Useful as a low-bandwidth alert where cellular service is maintained.</td></tr></table>
+<p><b>Industry considerations:</b> coverage and band compatibility, module lifecycle and 2G availability, SIM plan, antenna placement, power bursts, privacy, retry policy, duplicate prevention, network outage handling, latency, regional regulation and service provisioning. SMS is not inherently end-to-end encrypted; avoid sending sensitive data unnecessarily.</p>
+<p><b>Career links:</b> embedded firmware engineer, IoT engineer, electronics design/test engineer, wireless systems technician, validation engineer and field application engineer.</p>
+</section>
+<section id="troubleshooting">
+<h2>14. Troubleshooting guide</h2>
+<table><tr><th>Symptom</th><th>Possible cause / check</th><th>Corrective action</th></tr>
+<tr><td>Module will not power on</td><td>Wrong supply range, polarity, poor wiring</td><td>Verify board datasheet, input polarity and supply at the module.</td></tr><tr><td>Repeated resets while transmitting</td><td>Peak current insufficient; voltage drop</td><td>Use a rated supply/regulator and short, adequate wiring; measure during bursts.</td></tr><tr><td>No response to AT</td><td>Wrong UART pins/baud, no common ground, module booting</td><td>Verify pin labels, baud and logic levels; wait for boot and try a serial terminal.</td></tr><tr><td>SIM not detected / PIN required</td><td>SIM orientation, damaged/unsupported SIM, PIN lock</td><td>Check SIM seating/status and resolve PIN according to operator/module instructions.</td></tr><tr><td>Registration fails</td><td>Coverage, band mismatch, unsupported network, account/service restriction</td><td>Check antenna, <code>AT+CSQ</code>, registration status, operator support and module technology.</td></tr><tr><td>Poor signal</td><td>Antenna disconnected or poor placement</td><td>Attach compatible antenna and reposition away from interference/metal shielding.</td></tr><tr><td>SMS submission fails / +CMS ERROR</td><td>Service restriction, destination format, SIM/network state, command issue</td><td>Record full error, verify registration and SMS service, review manual and number format.</td></tr><tr><td>Recipient does not receive SMS</td><td>Submission not delivery; delay, invalid number, recipient unavailable</td><td>Check submission response, delivery report if supported, recipient number and service.</td></tr><tr><td>Garbled serial output</td><td>Baud/framing mismatch or incompatible logic levels</td><td>Match baud and UART framing; verify voltage levels and grounds.</td></tr><tr><td>Works intermittently</td><td>Loose connection, marginal power, weak signal, duplicate retries</td><td>Secure wiring, inspect power/signal, implement bounded retries and message IDs.</td></tr><tr><td>Text-mode command fails</td><td>Unsupported mode or wrong command sequence</td><td>Check module firmware, select supported mode and wait for prompt.</td></tr></table>
+</section>
+<section id="revision">
+<h2>15. Quick revision sheet</h2>
+<div class="two"><div><h3>Remember</h3><ul><li>TX connects to RX; RX connects to TX.</li><li>Common ground is needed for standard UART.</li><li>SIM ready ≠ network registered.</li><li>Command accepted ≠ recipient delivered.</li><li>Use Ctrl+Z (ASCII 26) to submit the text body after the prompt.</li><li>Power supply must handle modem peak current.</li><li>Check bands and local network technology before selecting a module.</li></ul></div><div><h3>Formula sheet</h3><ul><li><code>Tbit = 1 / baud</code></li><li><code>T ≈ N × frame bits / baud</code></li><li>8-N-1 frame = 10 bits per byte.</li><li>8-N-1 payload efficiency = 80%.</li><li><code>P = V × I</code></li><li>UART timing does not estimate SMS delivery latency.</li></ul></div></div>
+<h3>Typical initialization checklist</h3><ol><li>Power and antenna verified</li><li>UART communication: <code>AT</code></li><li>SIM: <code>AT+CPIN?</code></li><li>Signal: <code>AT+CSQ</code></li><li>Registration: supported registration query</li><li>SMS mode: <code>AT+CMGF=1</code></li><li>Submit, parse response and log result</li></ol>
+</section>
+<button type="button" id="topButton" title="Back to top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><div class="footer">ECE Learning Lab • Messaging (SMS) Using GSM • Illustrative diagrams and outputs are labelled as such. Always consult the exact module and board datasheets.</div>
+</main>
+<script>
+const topicData=[
+{q:"What does GSM stand for?",o:["Global System for Mobile Communications","General Serial Messaging","Global Signal Modulator","Group Switching Method"],a:0,e:"GSM means Global System for Mobile Communications."},
+{q:"What is the primary role of SMSC?",o:["Regulate Arduino voltage","Store and forward SMS messages","Convert UART to SPI","Measure antenna impedance"],a:1,e:"The SMSC handles store-and-forward messaging and delivery attempts under network rules."},
+{q:"Which command commonly selects SMS text mode?",o:["AT+CSQ","AT+CREG?","AT+CMGF=1","AT+CPIN?"],a:2,e:"AT+CMGF=1 selects text mode on supported modems."},
+{q:"How should UART transmit and receive lines be connected?",o:["TX to TX only","RX to RX only","TX to RX and RX to TX","No ground connection is needed"],a:2,e:"Each device's TX must feed the other device's RX; share ground and verify logic levels."},
+{q:"At 9600 bps, the bit duration is approximately:",o:["1.04 ms","104.2 μs","9.6 μs","10 s"],a:1,e:"T = 1/9600 s ≈ 104.17 microseconds."},
+{q:"What does AT+CPIN? help check?",o:["SIM readiness/PIN status","SMS delivery receipt only","UART frame efficiency","Antenna frequency band"],a:0,e:"It queries SIM PIN/readiness status; it does not by itself prove network registration."},
+{q:"Why may a GSM module need a separate supply?",o:["SMS needs AC power","It may draw high current bursts during transmission","UART cannot share ground","The SIM generates all module power"],a:1,e:"Transmission bursts can exceed what a controller board regulator can reliably supply."},
+{q:"What character submits a text-mode SMS body after the prompt on many AT-command modems?",o:["Tab","Escape","Ctrl+Z (ASCII 26)","Space"],a:2,e:"Ctrl+Z, ASCII 26, signals submission of the message body on common modem interfaces."},
+{q:"An AT+CMGS response is received. What is the safest interpretation?",o:["Recipient definitely read it","It commonly indicates SMS submission status, not guaranteed final delivery","Network registration is impossible","SIM is not required"],a:1,e:"Submission and final recipient delivery are separate events; delivery reports may be available if supported."},
+{q:"The modem resets whenever SMS sending starts. What should be checked first?",o:["CSS styles","Power voltage drop and peak-current capability","Phone screen brightness","Only the recipient's ringtone"],a:1,e:"Cellular transmit bursts can cause brownouts if the supply or wiring cannot provide required current."}
+];
+const gateData=[
+{q:"For 8-N-1 UART, total bits per byte are:",o:["8","9","10","11"],a:2,e:"One start + eight data + one stop = 10 bits."},
+{q:"A 30-byte payload at 9600 bps using 8-N-1 takes about:",o:["3.125 ms","31.25 ms","312.5 ms","0.3125 ms"],a:1,e:"30×10/9600 = 0.03125 s = 31.25 ms."},
+{q:"Which is a valid distinction?",o:["SIM ready means registered","UART baud predicts delivery latency","SMS submission is distinct from final delivery","APN is always required for SMS"],a:2,e:"Submission confirmation and final delivery are separate; other statements are not generally true."},
+{q:"What does AT+CSQ query on many modules?",o:["Signal quality","SMS text encoding only","Supply voltage","Recipient read status"],a:0,e:"AT+CSQ queries reported signal quality; interpret the returned values using the modem manual."},
+{q:"If a 5 V controller drives a modem RX pin, what must be verified?",o:["Font size","Logic-level tolerance and need for level shifting","Recipient's phone model only","SMSC spelling"],a:1,e:"UART pins have electrical limits. Use a proper level shifter/divider where required."}
+];
+function renderQuiz(id,data){const root=document.getElementById(id);root.innerHTML=data.map((x,i)=>`<fieldset class="quiz-q" id="${id}-q${i}"><legend>${i+1}. ${x.q}</legend>${x.o.map((v,j)=>`<label class="option"><input type="radio" name="${id}-${i}" value="${j}"> ${String.fromCharCode(65+j)}. ${v}</label>`).join("")}<div class="feedback hide" id="${id}-f${i}"></div></fieldset>`).join("");}
+function grade(id,data,resultId){let score=0,answered=0;data.forEach((x,i)=>{const selected=document.querySelector(`input[name="${id}-${i}"]:checked`);const f=document.getElementById(`${id}-f${i}`);f.classList.remove("hide","correct","incorrect","unanswered");if(!selected){f.classList.add("unanswered");f.innerHTML=`<b>Unanswered.</b> Correct answer: ${String.fromCharCode(65+x.a)}. ${x.o[x.a]}<br>${x.e}`;}else{answered++;if(Number(selected.value)===x.a){score++;f.classList.add("correct");f.innerHTML=`<b>Correct.</b> ${x.e}`;}else{f.classList.add("incorrect");f.innerHTML=`<b>Incorrect.</b> Correct answer: ${String.fromCharCode(65+x.a)}. ${x.o[x.a]}<br>${x.e}`;}}});document.getElementById(resultId).textContent=`Score: ${score}/${data.length} (${Math.round(score/data.length*100)}%). Answered: ${answered}; unanswered: ${data.length-answered}.`;}
+function resetQuiz(id,data,resultId){data.forEach((x,i)=>{document.querySelectorAll(`input[name="${id}-${i}"]`).forEach(n=>n.checked=false);const f=document.getElementById(`${id}-f${i}`);f.className="feedback hide";f.textContent="";});document.getElementById(resultId).textContent="";}
+renderQuiz("topicQuestions",topicData);renderQuiz("gateQuestions",gateData);
+document.getElementById("checkTopic").addEventListener("click",()=>grade("topicQuestions",topicData,"topicResult"));
+document.getElementById("resetTopic").addEventListener("click",()=>resetQuiz("topicQuestions",topicData,"topicResult"));
+document.getElementById("checkGate").addEventListener("click",()=>grade("gateQuestions",gateData,"gateResult"));
+document.getElementById("resetGate").addEventListener("click",()=>resetQuiz("gateQuestions",gateData,"gateResult"));
+// Theme toggle; preference is session-local so the file stays fully offline.
+document.getElementById("themeToggle").addEventListener("click",()=>{document.body.classList.toggle("dark");document.getElementById("themeToggle").textContent=document.body.classList.contains("dark")?"☀ Light mode":"☾ Dark mode";});
+// Reading progress indicator.
+function updateReadingProgress(){const max=document.documentElement.scrollHeight-window.innerHeight;document.getElementById("readingProgress").style.width=(max>0?(window.scrollY/max*100):0)+"%";}
+window.addEventListener("scroll",updateReadingProgress,{passive:true});window.addEventListener("resize",updateReadingProgress);updateReadingProgress();
+// Mock AT command responses — deliberately not a real modem session.
+const simConsole=document.getElementById("simConsole");let simLog="GSM Mock Console v1.0\nReady. Select a command above.\n[SIMULATION ONLY — no real modem connected]";
+const mockResponses={"AT":"OK","AT+CPIN?":"+CPIN: READY\nOK","AT+CSQ":"+CSQ: 18,0\nOK  (illustrative signal value)","AT+CREG?":"+CREG: 0,1\nOK  (illustrative: registered on home network)","AT+CMGF=1":"OK  (text mode selected in this mock)",'AT+CMGS="<DESTINATION_NUMBER>"':">  (mock prompt)\nType a message in real hardware, then send Ctrl+Z to submit.\nNo SMS has been sent."};
+document.querySelectorAll("[data-at]").forEach(b=>b.addEventListener("click",()=>{const cmd=b.getAttribute("data-at");simLog+="\n\n> "+cmd+"\n"+(mockResponses[cmd]||"ERROR (not implemented in mock)");simConsole.textContent=simLog;simConsole.scrollTop=simConsole.scrollHeight;}));
+document.getElementById("clearConsole").addEventListener("click",()=>{simLog="GSM Mock Console v1.0\nConsole cleared. Select a command above.\n[SIMULATION ONLY — no real modem connected]";simConsole.textContent=simLog;});
+</script>
+</body>
+</html>
